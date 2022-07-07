@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <button>button</button>
+    <script>
+        //스크립트로 넣은 버튼에는 동작 안함
+        // $('button').click(function(){
+        //     console.log($(this).html());
+        // })
+
+
+
+        //스크립트로 넣은 버튼에도 동작 작용 
+        $(document).on('click', 'button', function(){
+            console.log($(this).html());
+        })
+
+        //스크립트로 넣어준 버튼 
+        $('body').append('<button>btn</button>');
+    </script>
+</body>
+</html>

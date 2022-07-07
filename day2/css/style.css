@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+header{
+    background-color: aquamarine;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.content{
+    background-color: blanchedalmond;
+}
+
+footer{
+    background-color: blueviolet;
+}

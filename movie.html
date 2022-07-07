@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<link href="//hwangsunsoo.com/lecture/ex_2/labs/ajaxui_study/css/common.css" rel="stylesheet">
+<style type="text/css">
+.wrap {
+	padding: 30px;
+}
+.wrap table {
+	margin-top: 30px;
+}
+.wrap table th,
+.wrap table td {
+	border: 1px solid #000;
+	font-size: 20px;
+	line-height: 1.5;
+}
+.wrap table th {
+	background: #eee;
+}
+.wrap table th,
+.wrap table td {
+	padding: 20px;
+}
+input {
+	height: 30px;
+	font-size: 20px;
+	text-indent: 10px;
+}
+button {
+	height: 34px;
+	padding: 0 20px;
+	font-size: 20px;
+	line-height: 1;
+}
+.error {
+	font-size: 20px;
+	line-height: 1.5;
+	color: red;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+	<input type="text" id="targetDateInput" value="20220629">
+	<button id="targetDateInputButton">검색</button>
+	<table>
+	</table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+function movieRank(){
+    $('.wrap table').html('');
+    const targetDate = $('#targetDateInput').val();
+    $.ajax({
+        url:'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt='+targetDate,
+        dataType:'json',
+        success: function(data){
+            console.log(data);
+            if(data.faultInfo){
+                $('.wrap').append(`
+                 <p>${data.faultInfo.message}</p>
+                `);
+            }else{
+                const rank = data.boxOfficeResult.dailyBoxOfficeList;
+                $('.wrap table').html(`
+                    <tr>
+                        <th>순위</th>
+                        <th>제목</th>
+                        <th>개봉일</th>
+                    </tr>
+                `);
+                for(let i = 0; i < rank.length; i++){
+                    console.log(rank[i].rank, rank[i].movieNm, rank[i].openDt);
+                    $('.wrap table').append(`
+                        <tr>
+                            <td>${rank[i].rank}</td>
+                            <td>${rank[i].movieNm}</td>
+                            <td>${rank[i].openDt}</td>
+                        </tr>
+                    `);
+                }
+               
+            }
+        }
+    })
+}
+
+$('#targetDateInputButton').click(function(){
+    movieRank();
+})
+$('#targetDateInput').keypress(function(event) {
+    if(event.keyCode == 13) {
+        movieRank();
+    }
+})
+</script>
+</body>
+</html>

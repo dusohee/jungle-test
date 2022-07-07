@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="http://hwangsunsoo.com/customer/nuguduck_web/src/css/common_m.css">  
+<link rel="stylesheet" href="http://hwangsunsoo.com/customer/nuguduck_web/src/css/filter.css">  
+<script src="http://hwangsunsoo.com/customer/nuguduck_web/src/js/jquery-3.5.1.js"></script>
+<script src="http://hwangsunsoo.com/customer/nuguduck_web/src/js/jqeruy-ui.js"></script>
+<!-- <script src="http://hwangsunsoo.com/customer/nuguduck_web/src/js/filter.js"></script> -->
+<style>
+.capacityFilter { margin: 30px; }
+.innerType1, .innerType2 { display: block; }
+.capacityFilter .rangeBox { margin-bottom: 30px; }
+.capacityFilter .stepList { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+	<div class="capacityFilter">
+		<div class="innerType innerType1">
+			<div class="rangeBox">
+				<label class="rangeLabel" for="amount1">수용인원</label>
+				<input type="hidden" id="amount1">
+				<div class="filterVal">
+					<span class="min"> 최소</span>
+					<em>~</em>
+					<span class="max">60명</span>
+				</div>
+			</div>
+			<div id="slider-range01"></div>
+			<ol class="stepList">
+				<li>최소</li>
+				<li>20명</li>
+				<li>40명</li>
+				<li>60명</li>
+				<li>최대</li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="capacityFilter">
+		<div class="innerType innerType2">
+			<div class="rangeBox">
+				<label class="rangeLabel" for="amount2">전용면적</label>
+				<input type="hidden" id="amount2">
+				<div class="filterVal">
+					<span class="min"> 최소</span>
+					<em>~</em>
+					<span class="max">230㎡</span>
+				</div>
+			</div>
+			<div id="slider-range02"></div>
+			<ol class="stepList">
+				<li>최소</li>
+				<li>99㎡</li>
+				<li>198㎡</li>
+				<li>298㎡</li>
+				<li>최대</li>
+			</ol>
+		</div>
+	</div>
+
+<script>
+
+
+	$('#slider-range01').slider({
+		range: true,
+		option: true,
+		min: 0,
+		max: 80,
+		step: 10,
+		values: [ 0, 60 ],
+		slide: function( event, ui ) {
+			let minNum = ui.values[0];
+			let maxNum = ui.values[1];
+            console.log(minNum, maxNum);
+            $('#amount1').val(minNum + '~'+ maxNum);
+
+            if(minNum <10){
+                $('.innerType1 .min').text('최소');
+            }else{
+                $('.innerType1 .min').text(minNum+'명');
+            }
+            
+            if(maxNum>70){
+                $('.innerType1 .max').text('최대');
+            }else{
+                $('.innerType1 .max').text(maxNum+'명');
+            }
+		},
+	});
+
+
+    $('#slider-range02').slider({
+		range: true,
+		option: true,
+		min: 0,
+		max: 400,
+		// step: 10,
+		values: [ 0, 400 ],
+		slide: function( event, ui ) {
+			let minNum = ui.values[0];
+			let maxNum = ui.values[1];
+            console.log(minNum, maxNum);
+            $('#amount1').val(minNum + '~'+ maxNum);
+
+            if(minNum <10){
+                $('.innerType2 .min').text('최소');
+            }else{
+                $('.innerType2 .min').text(minNum+'제곱미터');
+            }
+            
+            if(maxNum>70){
+                $('.innerType2 .max').text('최대');
+            }else{
+                $('.innerType2 .max').text(maxNum+'제곱미터');
+            }
+            
+
+		},
+	});
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<link href="//hwangsunsoo.com/lecture/ex_2/labs/ajaxui_study/css/common.css" rel="stylesheet">
+<style type="text/css">
+.wrap{
+	padding: 30px;
+}
+.wrap table th, .wrap table td {
+	border: 1px solid #000;
+	font-size: 20px;
+}
+.wrap table th{
+	background: #eee;
+}
+.wrap table th,.wrap table td{
+	padding: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+	<table>
+		<tr>
+			<th>직업</th>
+			<th>이름</th>
+			<th>성별</th>
+		</tr>
+	</table>
+	<br><br>
+	<input type="text">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+$.ajax({
+    url:'ajax3.json',
+    dataType:'json',
+    success: function(data){
+        const tbl = $('.wrap table');
+
+        for(let i = 0; i<data.length; i++){
+            console.log(data[i].job, data[i].name, data[i].gender);
+            tbl.append(`
+        <tr>
+			<td class="job">${data[i].job}</td>
+			<td class="name">${data[i].name}</td>
+			<td class="gender">${data[i].name}</td>
+		</tr>
+        `);
+        }
+
+        $('input').on('keydown', function(){
+            let $this = $(this);
+            setTimeout(function(){
+                $('.job').each(function(){ 
+                    if( $(this).text() == $this.val() ){
+                        $(this).parent().show();
+                    } else {
+                        $(this).parent().hide();
+                    }
+                })
+            }, 200)
+
+        
+        console.log(data);
+    },
+    error : function(){
+        $('.wrap').append('<h1>error</h1>')
+    }
+
+})
+
+</script>
+</body>
+</html>

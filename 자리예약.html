@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>예제</title>
+<link href="http://hwangsunsoo.com/lecture/ex_2/class_5_complete/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://hwangsunsoo.com/lecture/ex_2/class_5_complete/css/04_append.css" rel="stylesheet" type="text/css" />
+<script src="http://hwangsunsoo.com/lecture/ex_2/class_5_complete/js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+	<div class="container">
+		<div class="container">
+
+			<div class="section intro">
+				<button class="btn_intro">버튼추가</button>
+			</div>
+			
+			<div class="section list">
+				<ul>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+<script>
+
+$('.btn_intro').click(function(){
+    $.ajax({
+        url: '자리예약.json',
+        dataType: 'json',
+        success: function(result){
+            console.log(result.seatInfo[0]);
+            const seat = result.seatInfo;
+            for(let i = 0; i<seat.length; i++){
+                let n = seat[i].name;
+                let p = seat[i].price;
+  
+
+                $('.section.list > ul').append(`
+                    <li class="unit">
+                        <button>
+                            ${n}<br>
+                            (${p})
+                        </button>
+                        
+                    </li>
+                `);
+            }
+            
+        }
+    })
+    $(this).hide();
+})
+
+</script>
+</body>
+</html>

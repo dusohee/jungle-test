@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>예제</title>
+<link href="http://hwangsunsoo.com/lecture/ex_2/class_5_complete/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="http://hwangsunsoo.com/lecture/ex_2/class_5_complete/css/01_counter.css" rel="stylesheet" type="text/css" />
+<script src="http://hwangsunsoo.com/lecture/ex_2/class_5_complete/js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+
+<div class="box_counter">
+	<div class="txt_Number">0</div>
+	<div class="box_btn">
+		<a href="#" class="btn_start">시작</a>
+		<a href="#" class="btn_stop">스톱</a>
+		<a href="#" class="btn_reset">리셋</a>
+	</div>
+</div>
+
+<script>
+    let current = 0;
+    let saveInt;
+    const txtNumber = $('.txt_Number')
+    
+    $('.btn_start').click(() => {
+        clearInterval(saveInt);
+        saveInt = setInterval(() => {
+            current++;
+            console.log(current);
+            txtNumber.text(current);
+        }, 1000);
+    })
+
+    $('.btn_stop').click(() =>{
+        clearInterval(saveInt);
+    })
+
+    $('.btn_reset').click(() =>{
+        current = 0; //숫자를 초기화 
+        txtNumber.text(current); //html에 찍어주기
+    })
+    
+
+    
+    
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body{
+        padding: 30px;
+        font-size: 35px;
+    }
+    .tabMenu{
+        padding-bottom: 10px;
+        border-bottom: 3px solid gray;
+        text-align: center;
+    }
+    .tabItem{
+        position:relative;
+        display: inline-block;
+        margin: 0 15px;
+        font-size: 35px;
+        color: #000;
+        text-decoration: none;
+    }
+.isActive{
+        color:hotpink;
+    }
+.isActive::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -13px;
+        height: 8px;
+        background: hotpink;
+    }
+</style>
+<body>
+    
+    <div class="tabMenu">
+        <a href="#" class="tabItem isActive">메뉴 1</a>
+        <a href="#" class="tabItem">메뉴 2</a>
+        <a href="#" class="tabItem">메뉴 3</a>
+        <a href="#" class="tabItem">메뉴 4</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    //첫번째 방법 
+    // $('.tabItem').click(function(){
+    //     $(this).parent().find('.tabItem').removeClass('isActive');
+    //     $(this).addClass('isActive');
+
+    // })
+
+    //두번째 방법 
+    $('.tabItem').click(function(){
+        $(this).siblings().removeClass('isActive');
+        $(this).addClass('isActive');
+
+    })
+</script>
+</body>
+</html>

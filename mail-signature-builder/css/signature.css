@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'NanumSquare','sans-serif';
+}
+#mailSignatureWrap {
+	width: 600px;
+	margin: 0 auto;
+	padding: 20px 20px 200px 20px;
+}
+#mailSignatureTitle {
+	display: block;
+	padding: 10px;
+	background: #ff0041;
+	font-weight: 800;
+	color: #fff;
+}
+#mailSignatureAreaBoder {
+	height: 250px;
+	margin-top: 20px;
+	padding: 10px;
+	border: 1px dotted #888;
+}
+#mailSignatureArea p {
+	margin: 0;
+}
+#mailSignatureForm {
+	margin: 20px 0;
+	background: #fff;
+	border: 1px solid #888;
+}
+#mailSignatureFormTable {
+	margin: 5px auto;
+}
+#mailSignatureFormTable td,
+#mailSignatureFormTable input,
+#imageViewArea {
+	font-family: 'NanumSquare','sans-serif';
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 1.5;
+}
+#mailSignatureFormTable td {
+	padding: 5px 10px;
+	color: #888;
+}
+#mailSignatureFormTable input {
+	text-indent: 5px;
+	border: 1px solid #888;
+}
+#mailSignatureFormButtonArea {
+	margin-top: 15px;
+	text-align: center;
+	font-size: 0;
+}
+#mailSignatureFormButtonArea button {
+	margin: 0 4px;
+	font-family: 'NanumSquare','sans-serif';
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #ff0041;
+}
+#imageViewArea {
+	margin-top: 20px;
+	padding: 10px;
+	border: 1px dotted #888;
+}

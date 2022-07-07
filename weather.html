@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<link href="//hwangsunsoo.com/lecture/ex_2/labs/ajaxui_study/css/common.css" rel="stylesheet">
+<style type="text/css">
+.wrap {
+	padding: 30px;
+}
+.wrap table {
+	margin-top: 20px;
+}
+.wrap table th, .wrap table td {
+	border: 1px solid #000;
+	font-size: 16px;
+	line-height: 1.5;
+}
+.wrap table th {
+	background: #eee;
+}
+.wrap table th .unit {
+	display: block;
+	font-size: 0.8em;
+	color: red;
+}
+.wrap table th, .wrap table td {
+	padding: 20px;
+}
+.wrap table tr.none td {
+	background: lightgray;
+}
+.wrap table tr.blue td {
+	background: lightblue;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+	<h1>서울대기환경정보</h1>
+	<table>
+		<tr>
+			<th>권역</th>
+			<th>자치구</th>
+			<th>대기환경</th>
+			<th>초미세먼지<em class="unit">PM-2.5 (㎍/m³)</em></th>
+			<th>미세먼지<em class="unit">PM-10 (㎍/m³)</em></th>
+		
+		</tr>
+	</table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+// https://creatorjo.tistory.com/99
+// https://parkjh7764.tistory.com/11
+// http://json.parser.online.fr/
+
+$.ajax({
+	url: `http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99`,
+	dataType: 'json',
+	success: function(data) {
+        console.log( data.RealtimeCityAir.row );
+        $('.wrap h1').append(`<small>${data.RealtimeCityAir.row[0].MSRDT}</small>`)
+
+        const row = data.RealtimeCityAir.row;
+        for(let i = 0; i < row.length; i++){
+            // console.log(row[i]);
+            let className = 'none';
+            switch (row[i].IDEX_NM){
+                case '좋음' : className = 'blue'; break;
+                case '보통' : className = 'green'; break;
+            }
+            $('.wrap table').append(`
+            <tr class="${className}">
+                 <td>${row[i].MSRRGN_NM}</td>
+                 <td>${row[i].MSRSTE_NM}</td>
+                 <td>${row[i].IDEX_NM}</td>
+                 <td>${row[i].NO2}</td>
+                 <td>${row[i].O3}</td>
+            </tr>
+            `)
+        }
+    }
+});
+</script>
+</body>
+</html>

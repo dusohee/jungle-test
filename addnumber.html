@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+	padding: 30px;
+}
+button, input {
+	width: 100px;
+	font-size: 40px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div>
+	<button class="minus">-</button>
+	<input id="number" type="text" value="3" min="1" max="10">
+	<button class="plus">+</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+    const obj = $('#number');
+    let min = Number(obj.attr('min'));
+    let max = Number(obj.attr('max'));
+
+    $('button').click(function(){
+      
+        let num = Number(obj.val());
+
+        if(obj.attr('min') == undefined){
+            min = 1;
+        }
+
+    
+        if($(this).hasClass('plus')){
+            obj.val(num + 1)
+            if(num >= max){
+                obj.val(max)
+            }
+        }else if($(this).hasClass('minus')){
+            obj.val(num-1);
+            if(num <= min){
+                obj.val(min)
+            }
+        }
+        console.log(num, min, max);
+       
+    })
+
+</script>
+
+</body>
+</html>

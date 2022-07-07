@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sample</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<link href="//hwangsunsoo.com/lecture/ex_2/labs/ajaxui_study/css/common.css" rel="stylesheet">
+<style type="text/css">
+.wrap ul li{
+	padding: 100px 20px;
+	background: #eee;
+	border: 1px solid #000;
+	font-size: 20px;
+	font-weight: bold;
+}
+.wrap button{
+	margin: 20px;
+	padding: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+	<ul>
+	</ul>
+	<button>More</button>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+$.ajax({
+    url:'data1.html',
+    dataType:'html',
+    success:function(data){
+        //단순 텍스트에서 jquery object로 변환 
+        const $data = $(data).siblings('li');
+
+        let call = 1;
+        function getData(){
+            //데이터를 다섯개씩 뿌리려고 call에 5를 곱해줌
+            for(let getNum =0; getNum <5 * call; getNum++){
+                $('.wrap ul').append($data[getNum]);
+            }
+            call++;
+            console.log('called:'+call);
+        }
+
+        console.log(data);
+        // $('.wrap ul').append(data);
+
+        getData();
+        $('.wrap button').on('click', getData);
+    }
+    
+
+    
+
+})
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 구글차트 가져오기  -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <style>
+        #exChart{
+            width: 50%;
+            height: auto;
+        }
+
+    </style>
+    <!-- div의 아이디를 밑에서 getElementById로 스크립트가 가져옴 -->
+    <div id="exChart"></div>
+
+
+<script type="text/javascript">
+
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawVisualization);
+function drawVisualization() {
+    var data = google.visualization.arrayToDataTable([
+        ['일자','문의수','조회수'],
+        ['4/30', 5, 13],
+        ['5/1', 13, 27],
+        ['5/2', 20, 33],
+        ['5/3', 15, 17],
+        ['5/4', 12, 25],
+        ['5/5', 12, 20],
+        ['5/6', 15, 25],
+    ]);
+
+    // 옵션 넣는 곳 , 복붙하면 됑 ~~
+
+    var options = {
+        title : '일간',
+        vAxis: {title: '문의수'},
+        hAxis: {title: '일자'},
+        seriesType: 'bars',
+        // 막대기 그래프 중에 조회수를 선그래프로 바꾸는 옵션
+        series: { 0:{color:'#016098'}, 1:{type:'line',pointShape:'circle',color:'#262626'} },
+        pointSize: 7,
+    };
+    var chart = new google.visualization.ComboChart(document.getElementById('exChart'));
+    chart.draw(data, options);
+}
+</script>
+</body>
+</html>

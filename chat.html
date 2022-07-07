@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>예제</title>
+  <link href="http://hwangsunsoo.com/lecture/ex_2/class_7_complete/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="http://hwangsunsoo.com/lecture/ex_2/class_7_complete/css/contents.css" rel="stylesheet" type="text/css" />
+  <script src="http://hwangsunsoo.com/lecture/ex_2/class_7_complete/js/jquery-1.8.3.min.js"></script>
+  <!-- <script src="http://hwangsunsoo.com/lecture/ex_2/class_7_complete/js/jquery_ui.js"></script> -->
+
+</head>
+
+<body>
+
+  <div class="wrap">
+    <div class="chat_area">
+      <div class="item yourmsg on">
+        <div class="box">
+          <p class="msg">안녕하세요</p>
+          <span class="time">오전 10:06</span>
+        </div>
+      </div>
+      <!-- //item -->
+      <div class="item mymsg on">
+        <div class="box">
+          <p class="msg">네 접니다</p>
+          <span class="time">오전 10:08</span>
+        </div>
+      </div>
+      <!-- //item -->
+    </div>
+    <!-- //chat_area -->
+
+    <div class="input_area">
+      <input type="text" class="mymsg" placeholder="나의 메세지">
+      <input type="text" class="yourmsg" placeholder="상대방의 메세지">
+    </div>
+    <!-- //input_area -->
+  </div>
+
+
+  <script>
+$('.input_area input[type="text"]').keypress(function(event){
+    
+    // 엔터 키코드가 13이고, 아무것도 타이핑을 안한 상태에서는 안읽을거야
+    if(event.keyCode == 13 && $(this).val().length != 0){
+        let _val = $(this).val();
+       let _time;
+       let _class = $(this).attr('class');
+       
+
+       //현재시간 구하기
+       const _date = new Date();
+       let _hh = _date.getHours();
+       let _mm = _date.getMinutes();
+       let _apm = '오전';
+
+       if(_hh > 12){
+        _apm = '오후';
+        _hh = _hh - 12;
+       }
+
+       _time = `${_apm} ${_hh}:${_mm}`;
+
+       //말풍선 태그 append를 통해 동작 추가
+       $('.chat_area').append(`
+                <div class="item ${_class}">
+                    <div class="box">
+                    <p class="msg">${_val}</p>
+                    <span class="time">${_time}</span>
+                    </div>
+                </div>
+       `)
+       console.log(_val, _time, _class);
+
+
+       //채팅이 부드럽게 들어가는 것처럼 보이게 하려고 
+       setTimeout(()=>{
+        $('.chat_area .item').addClass('on');
+       },10);
+
+        //입력후 input의 내용 초기화(삭제)
+        $(this).val("");
+
+        
+        //채팅창 맨 밑으로 갈수 있게 하는 스크롤 이벤트
+        var _itemH = 0;
+
+        //each문(반복문)을통해 선택한 각요소들의 높이값을 채크 할수 있음
+        $('.chat_area .item').each(()=>{
+            
+            //아이템 각각의 높이 
+            console.log($(this).height());
+
+           //마진 높이  
+            _itemH = $(this).height()+15;
+        })
+
+        //채팅창 영역에 스크롤 애니메이션 이벤트를 발생시킴
+        $('.chat_area').stop().animate({
+
+            // width:100px,
+            // height:100px
+            scrollTop: _itemH
+        })
+
+
+    }
+})
+
+  </script>
+
+
+
+</body>
+
+</html>

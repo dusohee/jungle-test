@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>예제</title>
+<link href="http://hwangsunsoo.com/lecture/ex_2/class_6_complete/css/reset.css" rel="stylesheet" type="text/css">
+<link href="http://hwangsunsoo.com/lecture/ex_2/class_6_complete/css/layout.css" rel="stylesheet" type="text/css">
+<link href="http://hwangsunsoo.com/lecture/ex_2/class_6_complete/css/contents.css" rel="stylesheet" type="text/css">
+<!-- <link href="css/contents.css" rel="stylesheet" type="text/css"> -->
+<script src="http://hwangsunsoo.com/lecture/ex_2/class_6_complete/js/jquery-1.8.3.min.js"></script>
+<!-- <script src="js/script_ui.js"></script> -->
+</head>
+<body>
+	<div class="wrap">
+
+		<div class="container">
+
+			<div class="box_intro">
+				<button class="btn_setting">자리셋팅</button>
+			</div>
+			<!-- e:box_intro -->
+			
+			<div class="section reservation">
+				<ol>
+					<li class="unit">
+						<button disabled>A1</button>
+					</li>
+					<li class="unit">
+						<button class="select">A2</button>
+					</li>
+					<li class="unit">
+						<button disabled>A1</button>
+					</li>
+					<li class="unit">
+						<button disabled>A2</button>
+					</li>
+					<li class="unit">
+						<button disabled>A1</button>
+					</li>
+					<li class="unit">
+						<button>A2</button>
+					</li>
+					<li class="unit">
+						<button>A1</button>
+					</li>
+					<li class="unit">
+						<button>A2</button>
+					</li>
+					<li class="unit">
+						<button>A1</button>
+					</li>
+					<li class="unit">
+						<button>A2</button>
+					</li>
+				</ol>
+
+				<div class="box_info">
+					<div class="info">
+						<p>자리선택 : <strong class="txt_info_number"></strong></p>
+						<p>총비용 : <strong class="txt_info_total">0</strong>원</p>
+					</div>
+					<div class="box_btn">
+						<button class="btn_submit">완료</button>
+					</div>
+				</div>
+			</div>
+			<!-- e:reservation -->
+
+			<div class="section complete">
+				<p class="txt_msg">자리예약이 아래와 같이 완료되었습니다.</p>
+				<p class="txt_number"></p>
+				<p class="txt_price">총 금액 : <strong></strong>원</p>
+				<button class="btn_reset">다시선택</button>
+			</div>
+
+		</div>
+
+	</div>
+		
+
+    <script>
+$(function(){
+    // 인트로 관련함수 호출
+    introFn();
+    
+    // 자리셋팅 click 이벤트
+    $('.btn_setting').click(function(){
+        reserveFn();
+    });
+
+    // 자리선택 완료 click 이벤트
+    $('.btn_submit').click(function(){
+        $('.section.reservation').hide();
+        $('.section.complete').show();
+    });
+
+    // 완료 후 리셋 click 이벤트
+    $('.btn_reset').click(function(){
+        $('.section.complete').hide();
+        $('.box_intro').show();
+    });
+})
+
+// 인트로 함수
+function introFn(){
+    $('.section.reservation').hide();
+    $('.section.complete').hide();
+}
+
+// 자리선택 함수
+function reserveFn(){
+    $('.section.reservation').show();
+    $('.box_intro').hide();
+
+    // 자리선택 초기화(li를 삭제처리)
+    $('.section.reservation > ol').empty();
+    // 하단 선택 정보 초기화
+    $('.txt_info_number').text('');
+    $('.txt_info_total').text(0);
+
+    // json데이터 로드하는 ajax
+    $.ajax({
+        url:'reserve.json',
+        dataType:'json',
+        success:function(result){
+            // ajax결과값을 변수에 담는다
+            const seat = result.seatInfo;
+            
+            // 자리셋팅 반복문
+            for(let i = 0; i < seat.length; i++){
+                let n = seat[i].name;
+                let p = seat[i].price;
+                let r = seat[i].reserve;
+                $('.section.reservation > ol').append(`
+                    <li class='unit'>
+                        <button ${r}>${n}<br>(${p})</button>
+                    </li>
+                `);
+            }
+
+            // 동적으로 셋팅된 버튼에 클릭 이벤트
+            $('.section.reservation > ol .unit > button').click(function(){
+                // select클래스 토글기능(있으면 빼주고 없으면 넣어주는 기능)
+                $(this).toggleClass('select');
+
+                let nameArr = []; // 배열 초기화
+                let totalPrice = 0; // 총합계 초기화
+                // 셋팅된 11개의 버튼을 탐색(each문을 통해)
+                $('.section.reservation > ol .unit > button').each(function(index){
+                    // 해당 순번의 버튼에 select라는 클래스가 있을 경우 true발생(hasClass를 통해)
+                    if( $(this).hasClass('select') ){
+                        // select를 갖고있는 버튼 순서에서 작동
+                        nameArr.push(seat[index].name) // 배열에 선택된 자리명을 추가해줌
+                        // totalPrice = totalPrice + Number(seat[index].price); // 총합계변수에 선택된 자리가격을 더함
+                        totalPrice += Number(seat[index].price); // 총합계변수에 선택된 자리가격을 더함
+                    }
+                })
+                // console.log(totalPrice)
+
+                // 자리 선택시 하단 정보를 업데이트
+                $('.txt_info_number').text(nameArr);
+                $('.txt_info_total').text(totalPrice);
+
+                // 자리 선택시 완료 페이지의 정보를 업데이트
+                $('.section.complete .txt_number').text(nameArr);
+                $('.section.complete .txt_price > strong').text(totalPrice);
+            });
+
+        }
+    });
+}
+    </script>
+</body>
+</html>

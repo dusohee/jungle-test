@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>Document</title>
+</head>
+
+<style> 
+body{
+    margin: 0;
+}
+.spot{
+    height: 200px;
+    background-color: lightblue;
+}
+.menu{
+    width: 100%;
+    height:60px;
+    background-color: orangered;
+}
+
+.isScroll .menu{
+    position: fixed;
+    top:0;
+    left:0;
+}
+
+</style>
+<body>
+    
+    <div class="spot">spot</div>
+    <div class="menu">menu</div>
+    <div class="contents">
+        contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br>
+            contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br>
+                contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br>
+                    contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br>
+                        contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br>
+                            contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br>
+                                contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br> contnets<Br>
+    </div>
+  
+
+
+    <script>
+        const menuOffSetTop = $('.menu').offset().top;
+        $(window).scroll(function(){
+            let scrollTopValue = $(this).scrollTop();
+            // console.log(menuOffSetTop, scrollTopValue);
+
+            if(scrollTopValue >menuOffSetTop){
+                $('body').addClass('isScroll');
+            }else{
+                $('body').removeClass('isScroll');
+            }
+
+        })
+        
+    </script>
+</body>
+</html>

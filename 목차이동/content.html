@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        #result {
+            padding: 20px;
+            border: 3px solid gray;
+        }
+
+        h1{
+            margin-bottom: 300px;
+        }
+    </style>
+
+    <div id="result"></div>
+
+    <h1 id="content-1"> 언제 </h1>
+    <h1 id="content-2">어디서 </h1>
+    <h1 id="content-3">왜</h1>
+    <h1 id="content-4">누구와</h1>
+    <h1 id="content-5">어떻게 </h1>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
+    <script>
+        const list = $('h1');
+        const result = $('#result');
+    
+        for(let i = 0; i < list.length; i++){
+            let inText = $(list[i]).text();
+            let inId = $(list[i]).attr('id');
+            console.log(list[i]);
+            // console.log(inText);
+            result.append(`<h2><a href="#${inId}">${i+1}.${inText}</a></h2>`);
+        }
+    </script>
+</body>
+</html>

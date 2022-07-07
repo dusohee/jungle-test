@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<title>메일 시그니처</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<meta property="og:title" content="메일 시그니처">
+<meta property="og:url" content="">
+<meta property="og:image" content="">
+<meta property="og:description" content="">
+<link rel="stylesheet" href="NanumSquare/nanumsquare.css" media="all">
+<link rel="stylesheet" href="css/index.css" media="all">
+<link rel="stylesheet" href="css/signature.css" media="all">
+<body>
+<div id="mailSignatureWrap">
+
+	<strong id="mailSignatureTitle">Mail Signature Editor (v1.1)</strong>
+
+	<div id="mailSignatureAreaBoder">
+		<!-- 여기서부터 -->
+		<table id="mailSignatureArea" style="border-spacing:0;border-collapse:collapse;background:transparent;">
+			<tr>
+				<td colspan="3" style="height:5px;padding:0;font-size:0;"><p style="margin:0;">&nbsp;</p></td>
+				<td rowspan="7" style="width:5px;padding:0;font-size:0;"><p style="margin:0;">&nbsp;</p></td>
+			</tr>
+			<tr>
+				<td style="padding:0;vertical-align:top;">
+					<p style="margin:0;font-family:'NanumSquare','sans-serif';font-weight:800;font-size:15px;line-height:1.5;color:#292929;letter-spacing:0;">
+						<span id="signNameKr">홍길동</span><br><span id="signNameEn">Hong, Gildong</span>
+					</p>
+				</td>
+				<td style="width:57px;padding:0;font-size:0;"><p style="margin:0;">&nbsp;</p></td>
+				<td style="padding:0;vertical-align:top;">
+					<p style="margin:0;font-family:'NanumSquare','sans-serif';font-weight:800;font-size:15px;line-height:1.5;color:#292929;letter-spacing:0;">
+						<span id="signInfo">팀 / Manager</span>
+					</p>
+				</td>
+			</tr>
+			<tr><td colspan="3" style="height:14px;padding:0;font-size:0;"><p style="margin:0;">&nbsp;</p></td></tr>
+			<tr>
+				<td style="padding:0;vertical-align:top;">
+					<p style="margin:0;font-family:'NanumSquare','sans-serif';font-weight:400;font-size:14px;line-height:1.7;color:#888;letter-spacing:0;">
+						<span id="signTel">010-9999-9999</span><br><span id="signMailto">help@ejungle.co.kr</span><br>02-9999-9999
+					</p>
+				</td>
+				<td style="width:57px;padding:0;font-size:0;"><p style="margin:0;">&nbsp;</p></td>
+				<td style="padding:0;vertical-align:top;">
+					<p style="margin:0;font-family:'NanumSquare','sans-serif';font-weight:400;font-size:14px;line-height:1.7;color:#888;letter-spacing:0;">
+						서울특별시 강남구
+					</p>
+				</td>
+			</tr>
+			<tr><td colspan="3" style="height:38px;padding:0;font-size:0;"><p style="margin:0;">&nbsp;</p></td></tr>
+			<tr>
+				<td style="padding:0;vertical-align:top;">
+					<p style="margin:0;line-height:1;"><img src="img/jungle.png" style="width:121.5px;vertical-align:top;" alt=""></p>
+				</td>
+				<td style="width:57px;padding:0;font-size:0;"><p style="margin:0;">&nbsp;</p></td>
+				<td style="padding:0;vertical-align:top;">
+					<p style="margin:0;line-height:1;"><span style="font-family:'NanumSquare','sans-serif';font-weight:400;font-size:14px;line-height:1;color:#888;letter-spacing:0;text-decoration:none;">ejungle.co.kr</span></p>
+				</td>
+			</tr>
+			<tr><td colspan="3" style="height:5px;padding:0;font-size:0;"><p style="margin:0;">&nbsp;</p></td></tr>
+		</table>
+		<!-- //여기까지 -->
+	</div>
+
+	<div id="mailSignatureForm">
+		<table id="mailSignatureFormTable">
+			<tr>
+				<td>한글이름</td>
+				<td><input type="text" id="signNameKrInput"></td>
+				<td>닉네임과 이름을 한글로 입력합니다.</td>
+			</tr>
+			<tr>
+				<td>영문이름</td>
+				<td><input type="text" id="signNameEnInput"></td>
+				<td>영문이름을 입력합니다.</td>
+			</tr>
+			<tr>
+				<td>직책</td>
+				<td><input type="text" id="signInfoInput" value="팀 / Manager"></td>
+				<td>소속과 직책을 입력합니다.</td>
+			</tr>
+			<tr>
+				<td>연락처</td>
+				<td><input type="text" id="signTelInput" value="010-"></td>
+				<td>연락처를 입력합니다.</td>
+			</tr>
+			<tr>
+				<td>메일주소</td>
+				<td><input type="text" id="signMailtoInput"></td>
+				<td>메일주소를 입력합니다.</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<div id="mailSignatureFormButtonArea">
+						<button id="imageView">미리보기</button>
+						<button id="imageDown">다운받기</button>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="imageViewArea">
+		<span>내용을 입력하고 버튼을 누르면 이미지가 생성됩니다.</span>
+	</div>
+
+</div>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/html2canvas.js"></script>
+<script>
+
+$(function(){
+    $('#signNameKrInput').keyup(function(){
+        $('#signNameKr').text($(this).val());
+    });
+    $('#signNameEnInput').keyup(function(){
+        $('#signNameEn').text($(this).val());
+    });
+    $('#signInfoInput').keyup(function(){
+        $('#signInfo').text($(this).val());
+    });
+    $('#signTelInput').keyup(function(){
+        $('#signTel').text($(this).val());
+    });
+    $('#signMailtoInput').keyup(function(){
+        $('#signMailto').text($(this).val());
+    });
+    $('#imageView').click(function(){
+        imageView();
+    });
+    $('#imageDown').click(function(){
+        imageView('down');
+    });
+    function imageView(param) {
+        $('#imageViewArea').html('');
+        html2canvas(document.querySelector('#mailSignatureArea')).then(canvas => {
+            document.getElementById('imageViewArea').appendChild(canvas);
+            if(param === 'down') {
+                const fileName = $('#signNameKrInput').val();
+                saveAs(canvas.toDataURL('image/jpg'),`mailsign_${fileName}.jpg`);
+            }
+        });
+    }
+    function saveAs(uri, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            link.href = uri;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            window.open(uri);
+        }
+    }
+});
+
+</script>
+</body>
+</html>

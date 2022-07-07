@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RESUME</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/reset.css">
+</head>
+<body>
+
+	<!-- wrap -->
+	<div class="wrap">
+
+		<!-- header -->
+		<header class="header">
+			<h1 class="header-title">이력서<br>
+				<strong>홍길동</strong></h1>
+			<figure class="header-picture">
+				<img src="http://hwangsunsoo.com/lecture/resume/img/profile.png" class="header-picture-image" alt="">
+			</figure>
+		</header>
+		<!-- //header -->
+<!-- content -->
+<main class="content">
+
+	<!-- section -->
+	<section class="section">
+
+		<h1 class="section-title">경력</h1>
+
+		<article class="article">
+			<h1 class="article-title">(주)C회사</h1>
+			<div class="article-text">
+				<div class="autoDateCalc">
+					<span class="startDate">2021. 07. 01.</span> ~
+					<span class="endDate">today</span>
+					<span class="periodResult"></span>
+				</div>
+			</div>
+		</article>
+
+		<article class="article">
+			<h1 class="article-title">(주)B회사</h1>
+			<div class="article-text">
+				<div class="autoDateCalc">
+					<span class="startDate">2021. 01. 01.</span> ~
+					<span class="endDate">2021. 05. 31.</span>
+					<span class="periodResult"></span>
+				</div>
+			</div>
+		</article>
+
+		<article class="article">
+			<h1 class="article-title">(주)A회사</h1>
+			<div class="article-text">
+				<div class="autoDataCalc">
+					<span class="startDate">2016. 01. 01.</span> ~
+					<span class="endDate">2020. 6. 31.</span>
+					<span class="periodResult"></span>
+				</div>
+			</div>
+		</article>
+
+	</section>
+	<!-- //section -->
+
+	<!-- section -->
+	<section class="section">
+
+		<h1 class="section-title">제목</h1>
+
+		<article class="article">
+			<h1 class="article-title">아티클제목</h1>
+			<ul class="article-list">
+				<li class="article-item">항목</li>
+			</ul>
+			<p class="article-text">줄글</p>
+		</article>
+
+		<article class="article">
+			<h1 class="article-title">아티클제목</h1>
+			<ul class="article-list">
+				<li class="article-item">항목</li>
+			</ul>
+			<p class="article-text">줄글</p>
+		</article>
+
+	</section>
+	<!-- //section -->
+
+</main>
+	<!-- //content -->
+	</div> 
+	<!-- //wrap -->
+
+
+
+	
+
+		<!-- footer -->
+		<footer class="footer">
+			&copy; 2021. Your Name
+		</footer>
+		<!-- //footer -->
+
+
+		<script src="js/jquery-3.6.0.min.js"></script>
+		<script>
+			
+			// 각각의 article을 반복으로 돌려줘
+			$('.article').each(function(){
+				
+				// article에서 .startDate 클래스명을 찾아서 변수에 넣는다.
+				let startDate = $(this).find('.startDate').text();
+			
+				if(startDate !=''){
+					
+					console.log(startDate);
+
+					// 연은 365를 곱하고, 월은 12, 일은 30-31로 환산해줘야되기 때문에 쪼개준다.
+
+					let startDateArr = startDate.split('.');
+					// console.log(startDateArr);
+
+					
+
+					let endDate = $(this).find('.endDate').text();
+
+
+					let endDateArr;
+
+					if(endDate == 'today') {
+
+						const now = new Date();
+
+						endDateArr = [now.getFullYear(), now.getMonth()+1, now.getDate()];
+
+						//now에서 getFull로 날짜를 뽑아준다.
+						// console.log(endDateArr);
+
+
+						if(endDateArr[1] < 10) {
+						$(this).find('.endDate').text(`${endDateArr[0]}. 0${endDateArr[1]}. ${endDateArr[2]}.`);
+						} else if(endDateArr[2] < 10) {
+						$(this).find('.endDate').text(`${endDateArr[0]}. ${endDateArr[1]}. 0${endDateArr[2]}.`);
+						} else if(endDateArr[1] < 10 && endDateArr[2] < 10) {
+						$(this).find('.endDate').text(`${endDateArr[0]}. 0${endDateArr[1]}. 0${endDateArr[2]}.`);
+						} else {
+						$(this).find('.endDate').text(`${endDateArr[0]}. ${endDateArr[1]}. ${endDateArr[2]}.`);
+						}
+
+					} else {
+
+					endDateArr = endDate.split('.');
+					
+					};
+
+					console.log(startDateArr, endDateArr)
+					console.log('-------------');
+
+
+					const startDateCalc = new Date(startDateArr[0], startDateArr[1]-1, startDateArr[2]);
+					const endDateCalc = new Date( endDateArr[0], endDateArr[1]-1, endDateArr[2]);
+
+					//일단위로 구하기. 1sec = 1000 ms , 60초, 60분, 24시간 
+					const dateCalc = endDateCalc.getTime() - startDateCalc.getTime();
+					const dateCalcResult = dateCalc / (1000 * 60 * 60 * 24);
+
+					console.log(startDateCalc, '///', endDateCalc, '///', dateCalc, '///', dateCalcResult);
+
+					// 클래명이 periodResult인 곳에 계산된 일 채워넣기! 
+					$(this).find('.periodResult').text(`(${dateCalcResult}일)`);
+
+
+					let dateResultText;
+					//math.floor 소수점 이하 버림 
+					const dateResultYear = Math.floor(dateCalcResult / 365);
+					const dateResultMonth =Math.round((dateCalcResult - (dateResultYear *365)) / 30);
+
+					console.log(dateResultYear, '년', dateResultMonth,'개월');
+
+
+
+					//0년이나 0개월은 안쓰도록 정리
+					if(dateResultYear == 0 && dateResultMonth == 0) {
+					dateResultText = `-`;
+					} else if(dateResultYear == 0) {
+					dateResultText = `${dateResultMonth}개월`;
+					} else if(dateResultMonth == 0 ) {
+					dateResultText = `${dateResultYear}년`;
+					} else {
+					dateResultText = `${dateResultYear}년 ${dateResultMonth}개월`;
+					}
+
+				$(this).find('.periodResult').text(`(${dateResultText})`);
+
+
+				}
+
+
+			});
+
+
+			
+		</script>
+</body>
+</html>

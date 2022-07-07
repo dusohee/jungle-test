@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+
+<style>
+.box {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+}
+.category-1 { background: red; }
+.category-2 { background: blue; }
+.category-3 { background: green; }
+</style>
+
+<div>
+    <button id="button-all">category all</button>
+    <button id="button-1">category 1</button>
+    <button id="button-2">category 2</button>
+    <button id="button-3">category 3</button>
+</div>
+
+<div class="boxArea">
+    <div class="box category-1"></div>
+    <div class="box category-1"></div>
+    <div class="box category-2"></div>
+    <div class="box category-3"></div>
+    <div class="box category-1"></div>
+    <div class="box category-2"></div>
+    <div class="box category-2"></div>
+    <div class="box category-3"></div>
+    <div class="box category-1"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://hwangsunsoo.com/lecture/do_it_interactive/13/js/isotope.pkgd.min.js"></script>
+<script>
+const grid = new Isotope('.boxArea', { //배치할 요소를 감싸고 있는 부모 요소명
+    itemSelector: '.box', //배치할 요소명
+    columnWidth: '.box', //넓이값을 구할 요소명
+    transitionDuration: '0.5s' //화면 재배치시 요소가 움직이는 속도
+});
+$('#button-all').click(function(){
+    grid.arrange({
+        filter : '*'
+    });
+})
+$('#button-1').click(function(){
+    grid.arrange({
+        filter : '.category-1'
+    });
+})
+$('#button-2').click(function(){
+    grid.arrange({
+        filter : '.category-2'
+    });
+})
+$('#button-3').click(function(){
+    grid.arrange({
+        filter : '.category-3'
+    });
+})
+</script>
+
+</body>
+</html>

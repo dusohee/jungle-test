@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 절대경로 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 상대경로 -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+    <title>Document</title>
+</head>
+
+
+
+<body>
+    <!-- header -->
+    <header class="header" id="header">
+        <script>
+            $('#header').load('include/header.html');
+        </script>
+      </header>
+      <!-- //header -->
+
+    <!-- content -->
+    <main class="content" id="content">
+        <h1>home</h1>
+    </main>
+    <!-- //content -->
+
+    <div w3-include-html="text.html"></div>
+
+    <!-- footer -->
+    <footer id="footer">
+        <script>
+            $('#footer').load('include/footer.html');
+        </script>
+    </footer>
+    <!-- //footer -->
+    
+    <script>
+        $('.header h1').click(function(){
+            alert('click');
+        })
+
+
+      includeHTML();
+
+        // 상단에 쓰고싶으면 이 아이 안에 스크립트를 넣어줘야돼 
+       // $( document ).ready(function() {
+  // Handler for .ready() called.
+//});
+    </script>
+
+
+</body>
+</html>

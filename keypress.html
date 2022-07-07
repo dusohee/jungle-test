@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    input{
+        font-size: 30px;
+    }
+</style>
+<body>
+    <input type="text" class="input">
+
+    <script>
+        $('.input').keypress(function(event){
+            console.log(event.keyCode);
+
+            //keyup은 누르고 올라오면 동작
+            //press랑 down은 누르면 동작
+            //enter의 keyCode는 13이니까 나중에 채팅같은거 칠때 keyCode가 13이면 메세지가 전송되도록 기능을 넣을 수 있음.
+
+            if(event.keyCode==13){
+                alert(this.value);
+            }
+        })
+    </script>
+</body>
+</html>
